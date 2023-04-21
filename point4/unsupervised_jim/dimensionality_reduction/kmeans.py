@@ -15,7 +15,7 @@ class KMeans:
         idx = np.random.choice(n_samples, self.n_clusters, replace=False)
         self.centroids = X[idx]
         
-        for i in range(self.max_iters):
+        for _ in range(self.max_iters):
             # Assign each data point to the nearest centroid
             distances = self._calc_distances(X)
             self.labels = np.argmin(distances, axis=1)
@@ -32,7 +32,8 @@ class KMeans:
             self.centroids = new_centroids
             
             
-    def predict(self, X):
+    def fit_predict(self, X):
+        self.fit(X)
         distances = self._calc_distances(X)
         return np.argmin(distances, axis=1)
         
